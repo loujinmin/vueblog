@@ -49,6 +49,7 @@ export default {
   },
   methods: {
     page(currentPage) {
+      this.currentPage = currentPage
       this.params = '?title=' + this.pagination.title
       this.params += '&description=' + this.pagination.description
       this.params += '&content=' + this.pagination.content

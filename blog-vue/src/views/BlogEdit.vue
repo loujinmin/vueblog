@@ -51,22 +51,26 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           const _this = this
-          _this.$axios.post('/api/blogs', this.ruleForm).then(res => {
-            // console.log(res.data)
-          })
-          _this.$axios.put('/api/blogs', this.ruleForm).then(res => {
-            // console.log(res.data)
-            this.$message({
-              type: 'success',
-              message: '操作成功'
+          if (!this.$route.params.blogId) {
+            _this.$axios.post('/api/blogs', this.ruleForm).then(res => {
+              // console.log(res.data)
             })
-          })
+          } else {
+            _this.$axios.put('/api/blogs', this.ruleForm).then(res => {
+              // console.log(res.data)
+              this.$message({
+                type: 'success',
+                message: '操作成功'
+              })
+            })
+          }
+
           _this.$router.push('/blogs')
         } else {
           this.$message({
-              type: 'warning',
-              message: '未知错误'
-            })
+            type: 'warning',
+            message: '未知错误'
+          })
           return false
         }
       })
